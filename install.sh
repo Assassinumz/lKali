@@ -1,5 +1,5 @@
 clear
-echo "=======Installing lKali======="
+echo "========Installing lKali========"
 sudo cp lKali.py /usr/bin/lkali
 sudo chmod +x /usr/bin/lkali
 echo "Installation Successful"
