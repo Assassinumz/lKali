@@ -13,7 +13,6 @@
 # •Website: http://pixiters.ga                                                 #
 # •GitHub: https://github.com/Assassinumz                                      #
 #                                                                              #
-#                                                                              #
 ################################################################################
 
 import os
