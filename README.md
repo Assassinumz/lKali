@@ -4,7 +4,7 @@
 </p>
 
 ## PREREQUISITES
-* Python 2.7
+* *Python 2.7*
 
 ## TESTED ON
 * **Kali Linux - Rolling Edition**
