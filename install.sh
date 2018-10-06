@@ -1,5 +1,6 @@
 clear
 echo "========Installing lKali========"
+pip install urllib
 sudo cp lKali.py /usr/bin/lkali
 sudo chmod +x /usr/bin/lkali
 echo "Installation Successful"

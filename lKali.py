@@ -15,9 +15,10 @@
 #                                                                              #
 ################################################################################
 
-import os
+import os, wget, platform
 from time import sleep
 from sys import exit
+from urllib import urlopen
 
 red= '\033[91m'
 green= '\033[92m'
@@ -51,7 +52,19 @@ def finish():
     print('{1}{2}Until next time...{0}').format(end, bold, green)
     exit(0)
 
+def network():
+    head()
+    try:
+        urlopen('https://duckduckgo.com')
+        return True
+    except:
+        return False
+
 def kernel():
+    network()
+    if network() == False:
+        print ('{0}Network failure. Please check your network and try again.').format(red)
+        exit(0)
     head()
     choose = raw_input('1{1}]{0} update\n2{1}]{0} upgrade\n3{1}]{0} dist-upgrade\n4{1}]{0} update all\n0{1}]{0} Main Menu\n\n'.format(end, red)+ input)
     clr()
@@ -107,9 +120,29 @@ def tools():
         tools()
     tools()
 
+def ngrok():
+    network()
+    if network() == False:
+        print ('{0}Network failure. Please check your network and try again.').format(red)
+        exit(0)
+    if os.path.isfile('/opt/ngrok') == 0:
+        print("{0}Downloading Ngrok...{1}").format(green, end)
+        if platform.architecture == "32bit":
+            wget.download('https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.tgz')
+            os.system('tar -xf ngrok-stable-linux-386.tgz')
+            os.system('mv ngrok /opt')
+            os.system('rm ngrok-stable-linux-386.tgz')
+        else:
+            wget.download('https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.tgz')
+            os.system('tar -xf ngrok-stable-linux-amd64.tgz')
+            os.system('mv ngrok /opt')
+            os.system('rm ngrok-stable-linux-amd64.tgz')
+    os.system('gnome-terminal -x bash -c "cd /opt && ./ngrok http 80; bash"')
+    main()
+
 def main():
     head()
-    choose = raw_input('if{1}]{0} ifconfig\nmsfs{1}]{0} Start MSF Services\nmsf{1}]{0} Start MSF Console\ntor{1}]{0} Install and start tor service\n1{1}]{0} Kernel\n2{1}]{0} Tools\n0{1}]{0} Exit\n\n'.format(end, red) + input)
+    choose = raw_input('if{1}]{0} ifconfig\nmsfs{1}]{0} Start MSF Services\nmsf{1}]{0} Start MSF Console\ntor{1}]{0} Install and start tor service\nngrok{1}]{0} Start Ngrok on port 80\n1{1}]{0} Kernel\n2{1}]{0} Tools\n0{1}]{0} Exit\n\n'.format(end, red) + input)
     if choose == '0':
         finish()
     elif choose == 'if':
@@ -125,6 +158,8 @@ def main():
     elif choose == 'tor':
         os.system('apt-get install tor')
         os.system('gnome-terminal -x tor')
+    elif choose == 'ngrok':
+        ngrok()
     elif choose == '1':
         kernel()
     elif choose == '2':
