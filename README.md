@@ -17,5 +17,11 @@ cd lKali
 chmod +x install.sh && ./install.sh
 lkali
 ```
+
+## SCREENSHOT
+<div align="center">
+  <img src="screenshot.png">
+</div>
+
 ## Have any questions ?
 * Ask me on [Discord](https://discord.gg/3nfQadt)
